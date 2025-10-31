@@ -15,8 +15,11 @@ function renderTodos(filter = "all") {
 
   // filter logic
   if (filter === "today") {
-    const today = new Date().toISOString().split("T")[0];
-    filteredTodos = todos.filter((todo) => todo.dueDate === today);
+    let now = new Date();
+  if (now.getHours() < 4) {
+  now.setDate(now.getDate() - 1);
+}
+  let today = now.toISOString().split("T")[0];
   } else if (filter === "completed") {
     filteredTodos = todos.filter((todo) => todo.completed);
   } else if (filter === "pending") {
